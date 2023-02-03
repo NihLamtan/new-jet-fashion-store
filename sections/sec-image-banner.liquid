@@ -1,0 +1,195 @@
+{{ 'sec-image-banner2.css' | asset_url | stylesheet_tag }}
+
+<div class="banner-image-p {{section.settings.image_banner_height}}">
+  {%- if section.settings.image_banner2 != blank -%}
+    {{ section.settings.image_banner2 | image_url: width: 1500 | image_tag }}
+  {%- else -%}
+    {{ images['man-in-suit-on-stairs.jpg'] | image_url: width: 1500 | image_tag }}
+  {%- endif -%}
+  <div class="image-banner-content {{section.settings.content_position}}">
+    {%- for block in section.blocks -%}
+      {%- case block.type -%}
+        {%- when 'banner_heading_one' -%}
+          <h2 class="main-h2">{{ block.settings.main_banner_h2 }}</h2>
+        {%- when 'banner_heading_two' -%}
+          <h1 class="main-h1">{{ block.settings.main_banner_h1 }}</h1>
+        {%- when 'banner_para' -%}
+          <p class="para-2">{{ block.settings.main_banner_para }}</p>
+        {%- when 'banner_buttons' -%}
+          <div class="banner-buttons">
+            <a class="btn-1" href="{{block.settings.button_One}}">{{ block.settings.button_One }}</a>
+            <a class="btn-1" href="{{block.settings.button_Two}}">{{ block.settings.button_Two }}</a>
+          </div>
+      {% endcase %}
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Sec_Image_Banner2",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image_banner2",
+      "label": "Select Image"
+    },
+
+    {
+      "type": "select",
+      "id": "image_banner_height",
+      "label": "Image Height",
+      "default": "medium_image",
+      "options": [
+        {
+          "value": "small_image",
+          "label": "small"
+        },
+        {
+          "value": "medium_image",
+          "label": "medium"
+        },
+        {
+          "value": "large_image",
+          "label": "large"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "content_position",
+      "label": "positions",
+      "options": [
+        {
+          "value": "top-left",
+          "label": "Top Left"
+        },
+        {
+          "value": "top-center",
+          "label": "Top Center"
+        },
+        {
+          "value": "top-right",
+
+          "label": "Top Right"
+        },
+        {
+          "value": "bottom-left",
+          "label": "Bottom Left"
+        },
+        {
+          "value": "bottom-center",
+          "label": "Bottom Center"
+        },
+        {
+          "value": "bottom-right",
+          "label": "Bottom Right"
+        },
+        {
+          "value": "position-center",
+          "label": "Center"
+        },
+        {
+          "value": "center-left",
+          "label": "Center Left"
+        },
+        {
+          "value": "center-right",
+          "label": "Center Right"
+        }
+      ],
+      "default": "position-center"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "banner_heading_one",
+      "name": "banner_heading_one",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "main_banner_h2",
+          "label": "First Heading Here",
+          "default": "new arrival"
+        }
+      ]
+    },
+    {
+      "type": "banner_heading_two",
+      "name": "banner_heading_two",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "main_banner_h1",
+          "label": "Second Heading Here",
+          "default": "Simple Cotton T-Shirts"
+        }
+      ]
+    },
+    {
+      "type": "banner_para",
+      "name": "banner_para",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "main_banner_para",
+          "label": "Paragraph Here",
+          "default": "Casual line. Short design. 100% suede leather. Backstitched elbow patche"
+        }
+      ]
+    },
+    {
+      "type": "banner_buttons",
+      "name": "banner_buttons",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "label": "Button One",
+          "id": "button_One",
+          "default": "MENS"
+        },
+        {
+          "type": "url",
+          "label": "button One Link",
+          "id": "button_One_Link"
+        },
+        {
+          "type": "text",
+          "label": "Button Two",
+          "id": "button_Two",
+          "default": "WOMENS"
+        },
+        {
+          "type": "url",
+          "label": "button Two Link",
+          "id": "button_Two_Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sec_Image_Banner2",
+      "blocks": [
+        {
+          "type": "banner_heading_one"
+        },
+        {
+          "type": "banner_heading_two"
+        },
+        {
+          "type": "banner_para"
+        },
+        {
+          "type": "banner_buttons"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
